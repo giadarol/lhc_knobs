@@ -74,7 +74,7 @@ act_cmin_b2 = ActionCmin(collider['lhcb2'])
 
 for nn in (mqs_circuits_4_quads['b1'] + mqs_circuits_2_quads['b1']
            + mqs_circuits_4_quads['b2'] + mqs_circuits_2_quads['b2']):
-    collider.vars['old_' + nn] = collider.vars[nn]._value
+    collider.vars['old_' + nn] = collider.vars[nn]._expr
     collider.vars[nn] = collider.vars[nn]._value
 
 optimizers = {'b1': {}, 'b2': {}}

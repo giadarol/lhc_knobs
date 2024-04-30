@@ -62,7 +62,7 @@ mqt_circuits['b2'] = [
  'kqtd.a81b2']
 
 for nn in mqt_circuits['b1'] + mqt_circuits['b2']:
-    collider.vars['old_' + nn] = collider.vars[nn]._value
+    collider.vars['old_' + nn] = collider.vars[nn]._expr
     collider.vars[nn] = collider.vars[nn]._value
 
 optimizers = {'b1': {}, 'b2': {}}
