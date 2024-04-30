@@ -22,7 +22,8 @@ collider.lhcb1.twiss_default['method'] = '4d'
 collider.lhcb2.twiss_default['method'] = '4d'
 
 # Match tune knob
-b1_mqt_circuits = [
+mqt_circuits={}
+mqt_circuits['b1'] = [
  'kqtf.a12b1',
  'kqtf.a23b1',
  'kqtf.a34b1',
@@ -30,9 +31,17 @@ b1_mqt_circuits = [
  'kqtf.a56b1',
  'kqtf.a67b1',
  'kqtf.a78b1',
- 'kqtf.a81b1']
+ 'kqtf.a81b1',
+ 'kqtd.a12b1',
+ 'kqtd.a23b1',
+ 'kqtd.a34b1',
+ 'kqtd.a45b1',
+ 'kqtd.a56b1',
+ 'kqtd.a67b1',
+ 'kqtd.a78b1',
+ 'kqtd.a81b1']
 
-b2_mqt_circuits = [
+mqt_circuits['b2'] = [
  'kqtf.a12b2',
  'kqtf.a23b2',
  'kqtf.a34b2',
@@ -40,29 +49,53 @@ b2_mqt_circuits = [
  'kqtf.a56b2',
  'kqtf.a67b2',
  'kqtf.a78b2',
- 'kqtf.a81b2']
+ 'kqtf.a81b2',
+ 'kqtd.a12b2',
+ 'kqtd.a23b2',
+ 'kqtd.a34b2',
+ 'kqtd.a45b2',
+ 'kqtd.a56b2',
+ 'kqtd.a67b2',
+ 'kqtd.a78b2',
+ 'kqtd.a81b2']
 
-for nn in b1_mqt_circuits + b2_mqt_circuits:
+for nn in mqt_circuits['b1'] + mqt_circuits['b2']:
     collider.vars['old_' + nn] = collider.vars[nn]._value
     collider.vars[nn] = collider.vars[nn]._value
 
-dq_match = 1e-4
-twb1 = collider.lhcb1.twiss()
+optimizers = {'b1': {}, 'b2': {}}
+dq_match = 1e-3
+for bname in ['b1', 'b2']:
+    tw = collider[f'lhc{bname}'].twiss()
+    opt_qx = collider[f'lhc{bname}'].match_knob(
+        knob_name=f'dqx.{bname}',
+        knob_value_start=0.,
+        knob_value_end=dq_match,
+        run=False,
+        vary=xt.VaryList(mqt_circuits[bname], step=1e-8),
+        targets=[
+            tw.target('qx', tw.qx + dq_match, tol=1e-7),
+            tw.target('qy', tw.qy, tol=1e-7)
+        ]
+    )
 
-opt_b1_dqx = collider.lhcb1.match_knob(
-    knob_name='dqx.b1',
-    knob_value_start=0.,
-    knob_value_end=dq_match,
-    run=False,
-    vary=xt.VaryList(b1_mqt_circuits, step=1e-8),
-    targets=[
-        twb1.target('qx', twb1.qx + dq_match, tolerance=1e-7),
-        twb1.target('qy', twb1.qy, tolerance=1e-7)
-    ]
-)
+    opt_qx.solve()
+    opt_qx.generate_knob()
+    optimizers[bname]['qx'] = opt_qx
 
-opt_b1_dqx.solve()
-opt_b1_dqx.generate_knob()
+    opt_qy = collider[f'lhc{bname}'].match_knob(
+        knob_name=f'dqy.{bname}',
+        knob_value_start=0.,
+        knob_value_end=dq_match,
+        run=False,
+        vary=xt.VaryList(mqt_circuits[bname], step=1e-8),
+        targets=[
+            tw.target('qx', tw.qx, tolerance=1e-7),
+            tw.target('qy', tw.qy + dq_match, tolerance=1e-7)
+        ]
+    )
 
-
+    opt_qy.solve()
+    opt_qy.generate_knob()
+    optimizers[bname]['qy'] = opt_qy
 
