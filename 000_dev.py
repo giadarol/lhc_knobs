@@ -1,5 +1,6 @@
 from cpymad.madx import Madx
 import xtrack as xt
+import numpy as np
 
 mad = Madx()
 
@@ -20,6 +21,7 @@ twmad_b2  = mad.twiss(sequence='lhcb2', table='twb2')
 collider = xt.Multiline.from_madx(madx=mad)
 collider.lhcb1.twiss_default['method'] = '4d'
 collider.lhcb2.twiss_default['method'] = '4d'
+collider.lhcb2.twiss_default['reverse'] = True
 
 # Match tune knob
 mqt_circuits={}
@@ -98,4 +100,3 @@ for bname in ['b1', 'b2']:
     opt_qy.solve()
     opt_qy.generate_knob()
     optimizers[bname]['qy'] = opt_qy
-
