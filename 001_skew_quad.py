@@ -23,7 +23,6 @@ collider.lhcb1.twiss_default['method'] = '4d'
 collider.lhcb2.twiss_default['method'] = '4d'
 collider.lhcb2.twiss_default['reverse'] = True
 
-# Match tune knob
 mqs_circuits_4_quads={}
 mqs_circuits_2_quads={}
 mqs_circuits_4_quads['b1'] = [
@@ -117,3 +116,12 @@ for bname in ['b1', 'b2']:
     opt_im.generate_knob()
     optimizers[bname]['im'] = opt_im
 
+
+# Check orthogonality
+line.vars['cmrs.b1_op'] = 1e-3
+line.vars['cmis.b1_op'] = 1e-3
+assert np.isclose(collider.lhcb1.twiss().c_minus/np.sqrt(2), 1e-3, rtol=0, atol=1.5e-5)
+
+line.vars['cmrs.b2_op'] = 1e-3
+line.vars['cmis.b2_op'] = 1e-3
+assert np.isclose(collider.lhcb2.twiss().c_minus/np.sqrt(2), 1e-3, rtol=0, atol=1.5e-5)

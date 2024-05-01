@@ -23,7 +23,6 @@ collider.lhcb1.twiss_default['method'] = '4d'
 collider.lhcb2.twiss_default['method'] = '4d'
 collider.lhcb2.twiss_default['reverse'] = True
 
-# Match tune knob
 mqt_circuits={}
 mqt_circuits['b1'] = [
  'kqtf.a12b1',
