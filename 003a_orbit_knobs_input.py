@@ -317,7 +317,71 @@ dct = {'on_sep1_h': {'acbch5.l1b2': -1.41918166577e-05,
   'acbyhs4.r8b1': 7.87038416337e-06,
   'acbyhs4.r8b2': 3.68868985081e-05,
   'acbyhs5.r8b1': -4.02874597858e-05,
-  'acbyhs5.r8b2': -4.73283800199e-06}}
+  'acbyhs5.r8b2': -4.73283800199e-06},
+ 'on_xip1b1': {'acbch5.r1b1': -0.00010695556865921357,
+  'acbch6.l1b1': -3.0217482187889205e-05,
+  'acbyh4.l1b1': 6.856138213387039e-05,
+  'acbyhs4.r1b1': 0.0001391794798175955},
+ 'on_xip1b2': {'acbch5.l1b2': -9.241987776514907e-05,
+  'acbch6.r1b2': -3.103986623665818e-05,
+  'acbyh4.r1b2': 7.116645148310001e-05,
+  'acbyhs4.l1b2': 0.00011935165190059529},
+ 'on_xip2b1': {'acbchs5.r2b1': -0.00010712188353610386,
+  'acbyh4.r2b1': 6.699916191143782e-05,
+  'acbyh5.l2b1': -4.3755233051432573e-05,
+  'acbyhs4.l2b1': 0.0001130012471953883},
+ 'on_xip2b2': {'acbch5.r2b2': -5.02569928150234e-05,
+  'acbyh4.l2b2': 3.903747975130236e-05,
+  'acbyhs4.r2b2': 0.00011947754342607242,
+  'acbyhs5.l2b2': -6.915878820476851e-05},
+ 'on_xip5b1': {'acbch5.r5b1': -6.90438229941417e-05,
+  'acbch6.l5b1': -3.4122763497305895e-05,
+  'acbyh4.l5b1': 4.305846686316669e-05,
+  'acbyhs4.r5b1': 0.00012182670006994758},
+ 'on_xip5b2': {'acbch5.l5b2': -7.883531897078955e-05,
+  'acbch6.r5b2': -3.283478503588004e-05,
+  'acbyh4.r5b2': 4.426343111081036e-05,
+  'acbyhs4.l5b2': 0.00013290206219095492},
+ 'on_xip8b1': {'acbch5.l8b1': -4.451344020420723e-05,
+  'acbch6.r8b1': -1.772515768038751e-05,
+  'acbyh4.r8b1': -1.3161405565541242e-06,
+  'acbyhs4.l8b1': 0.00010534085207737146},
+ 'on_xip8b2': {'acbchs5.l8b2': -6.655636938812533e-05,
+  'acbyh4.l8b2': 4.0116240399150104e-05,
+  'acbyh5.r8b2': -4.4338431146318484e-05,
+  'acbyhs4.r8b2': 0.00010554338873316548},
+ 'on_yip1b1': {'acbcv5.l1b1': -9.226682040626933e-05,
+  'acbcv6.r1b1': -3.125540718932119e-05,
+  'acbyv4.r1b1': 7.095340242677776e-05,
+  'acbyvs4.l1b1': 0.00011936980924063663},
+ 'on_yip1b2': {'acbcv5.r1b2': -0.00010695549276253395,
+  'acbcv6.l1b2': -3.0042502923549863e-05,
+  'acbyv4.l1b2': 6.880556134947911e-05,
+  'acbyvs4.r1b2': 0.0001391790416970699},
+ 'on_yip2b1': {'acbcv5.r2b1': -5.0654087072343794e-05,
+  'acbyv4.l2b1': 2.2322593752092693e-05,
+  'acbyvs4.r2b1': 0.00011745759301569891,
+  'acbyvs5.l2b1': -6.944024443477368e-05},
+ 'on_yip2b2': {'acbcvs5.r2b2': -0.00010791908518872986,
+  'acbyv4.r2b2': 6.233838288087331e-05,
+  'acbyv5.l2b2': -4.403924983532336e-05,
+  'acbyvs4.l2b2': 0.00010597017184973377},
+ 'on_yip5b1': {'acbcv5.l5b1': -7.839845878125118e-05,
+  'acbcv6.r5b1': -3.2240678693847206e-05,
+  'acbyv4.r5b1': 4.0605110058233945e-05,
+  'acbyvs4.l5b1': 0.0001356822376765277},
+ 'on_yip5b2': {'acbcv5.r5b2': -6.906799725731989e-05,
+  'acbcv6.l5b2': -3.468990844473363e-05,
+  'acbyv4.l5b2': 4.6802558808403085e-05,
+  'acbyvs4.r5b2': 0.0001189312950278371},
+ 'on_yip8b1': {'acbcvs5.l8b1': -6.842111090808824e-05,
+  'acbyv4.l8b1': 4.053123643411973e-05,
+  'acbyv5.r8b1': -4.3689926858664866e-05,
+  'acbyvs4.r8b1': 0.00011079456790525628},
+ 'on_yip8b2': {'acbcv5.l8b2': -4.569813567560489e-05,
+  'acbyv4.r8b2': 3.999948490422221e-05,
+  'acbyvs4.l8b2': 0.00010553487983680055,
+  'acbyvs5.r8b2': -6.864872704879031e-05}}
 
 
 configs = {}
@@ -326,8 +390,13 @@ for nn in dct.keys():
 
     configs[nn] = {}
 
-    purpose = ('sep' if '_sep' in nn
-          else   'o' if '_o' in nn
+    purpose = (
+               'xipb1' if '_xip' in nn and 'b1' in nn
+          else 'xipb2' if '_xip' in nn and 'b2' in nn
+          else 'yipb1' if '_yip' in nn and 'b1' in nn
+          else 'yipb2' if '_yip' in nn and 'b2' in nn
+          else 'sep' if '_sep' in nn
+          else 'o' if '_o' in nn
           else 'a' if '_a' in nn
           else 'x' if '_x' in nn
           else None)
@@ -368,6 +437,26 @@ for nn in dct.keys():
         targets = {
             'lhcb1': {plane:  0, 'p' + plane: 1e-6},
             'lhcb2': {plane:  0, 'p' + plane: 1e-6},
+        }
+    elif purpose == 'xipb1':
+        targets = {
+            'lhcb1': {plane:  1e-3, 'p' + plane: 0},
+            'lhcb2': None
+        }
+    elif purpose == 'xipb2':
+        targets = {
+            'lhcb1': None,
+            'lhcb2': {plane:  1e-3, 'p' + plane: 0},
+        }
+    elif purpose == 'yipb1':
+        targets = {
+            'lhcb1': {plane:  1e-3, 'p' + plane: 0},
+            'lhcb2': None
+        }
+    elif purpose == 'yipb2':
+        targets = {
+            'lhcb1': None,
+            'lhcb2': {plane:  1e-3, 'p' + plane: 0},
         }
     else:
         raise ValueError(f'Unknown purpose {purpose}')

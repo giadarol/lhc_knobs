@@ -50,6 +50,9 @@ for knob_name in configs.keys():
     # Build targets
     targets = []
     for lname in ['lhcb1', 'lhcb2']:
+        if conf['targets'][lname] is None:
+            continue
+
         for tname in conf['targets'][lname]:
             targets.append(xt.Target(tname, line=lname, at='ip'+str(ipn),
                                     value=conf['targets'][lname][tname]))
