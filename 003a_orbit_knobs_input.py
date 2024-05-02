@@ -372,5 +372,11 @@ for nn in dct.keys():
     else:
         raise ValueError(f'Unknown purpose {purpose}')
 
+    correctors = dct[nn].copy()
+    for cc in correctors:
+        if not cc.startswith('acbx'):
+            correctors[cc] = None
+
     configs[nn]['targets'] = targets
+    configs[nn]['correctors'] = correctors
 
