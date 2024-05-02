@@ -1,4 +1,4 @@
-import xtrack as xt
+import json
 
 dct = {'on_sep1_h': {'acbch5.l1b2': -1.41918166577e-05,
   'acbch5.r1b1': 1.64239081776e-05,
@@ -380,3 +380,5 @@ for nn in dct.keys():
     configs[nn]['targets'] = targets
     configs[nn]['correctors'] = correctors
 
+with open('ip_orbit_knobs_configs.json', 'w') as fid:
+    json.dump(configs, fid, indent=4)
