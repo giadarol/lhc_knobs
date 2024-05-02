@@ -46,6 +46,7 @@ nn = list(configs.keys())[0] # To be replaced by a loop over all knobs
 conf = configs[nn]
 ipn = conf['ip']
 
+# Build targets
 targets = []
 for lname in ['lhcb1', 'lhcb2']:
     for tname in conf['targets'][lname]:
@@ -56,4 +57,17 @@ start_b1 = f'e.ds.l{ipn}.b1'
 start_b2 = f'e.ds.l{ipn}.b2'
 end_b1 = f's.ds.r{ipn}.b1'
 end_b2 = f's.ds.r{ipn}.b2'
+
+plane = conf['plane']
+
+targets += [
+    xt.Target(plane, 0, line='lhcb1', at=xt.END),
+    xt.Target(plane, 0, line='lhcb2', at=xt.END),
+    xt.Target('p' + plane, 0, line='lhcb2', at=xt.END),
+    xt.Target('p' + plane, 0, line='lhcb1', at=xt.END),
+]
+
+vary = []
+for cc in conf['correctors']:
+    vary.append(xt.Vary(cc, step=1e-8))
 
