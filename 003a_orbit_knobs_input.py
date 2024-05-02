@@ -348,3 +348,29 @@ for nn in dct.keys():
     ip = int(tmp)
     configs[nn]['ip'] = ip
 
+    # generate targets
+    if purpose == 'sep':
+        targets = {
+            'lhcb1': {plane:  1e-3, 'p' + plane: 0},
+            'lhcb2': {plane: -1e-3, 'p' + plane: 0},
+        }
+    elif purpose == 'o':
+        targets = {
+            'lhcb1': {plane:  1e-3, 'p' + plane: 0},
+            'lhcb2': {plane:  1e-3, 'p' + plane: 0},
+        }
+    elif purpose == 'x':
+        targets = {
+            'lhcb1': {plane:  0, 'p' + plane: 1e-6},
+            'lhcb2': {plane:  0, 'p' + plane: -1e-6},
+        }
+    elif purpose == 'a':
+        targets = {
+            'lhcb1': {plane:  0, 'p' + plane: 1e-6},
+            'lhcb2': {plane:  0, 'p' + plane: 1e-6},
+        }
+    else:
+        raise ValueError(f'Unknown purpose {purpose}')
+
+    configs[nn]['targets'] = targets
+
