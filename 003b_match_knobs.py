@@ -1,6 +1,7 @@
 from cpymad.madx import Madx
 import xtrack as xt
 import numpy as np
+import json
 
 mad = Madx()
 
@@ -35,3 +36,18 @@ assert_allclose(twflat.lhcb1.x, 0.0, atol=1e-14)
 assert_allclose(twflat.lhcb1.y, 0.0, atol=1e-14)
 assert_allclose(twflat.lhcb2.x, 0.0, atol=1e-14)
 assert_allclose(twflat.lhcb2.y, 0.0, atol=1e-14)
+
+# Load configs
+with open('ip_orbit_knobs_configs.json', 'r') as fid:
+    configs = json.load(fid)
+
+nn = list(configs.keys())[0] # To be replaced by a loop over all knobs
+
+conf = configs[nn]
+ipn = conf['ip']
+
+targets = []
+for lname in ['lhcb1', 'lhcb2']:
+    for tname in conf['targets'][lname]:
+        targets.append(xt.Target(tname, line=lname, at='ip'+str(ipn),
+                                 value=conf['targets'][lname][tname]))
