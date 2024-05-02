@@ -51,3 +51,9 @@ for lname in ['lhcb1', 'lhcb2']:
     for tname in conf['targets'][lname]:
         targets.append(xt.Target(tname, line=lname, at='ip'+str(ipn),
                                  value=conf['targets'][lname][tname]))
+
+start_b1 = f'e.ds.l{ipn}.b1'
+start_b2 = f'e.ds.l{ipn}.b2'
+end_b1 = f's.ds.r{ipn}.b1'
+end_b2 = f's.ds.r{ipn}.b2'
+
