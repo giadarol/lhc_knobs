@@ -342,3 +342,9 @@ for nn in dct.keys():
     plane = 'x' if 'h' in one_corrector else 'y'
     configs[nn]['plane'] = plane
 
+    # Determine ip
+    tmp = one_corrector.split('.')[1][1]
+    assert tmp in ['1', '2', '5', '8']
+    ip = int(tmp)
+    configs[nn]['ip'] = ip
+
